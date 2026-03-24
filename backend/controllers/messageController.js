@@ -35,3 +35,14 @@ export const sendMessage = async (req, res)=>{
     }
 }
 
+export const getMessage = async (req, res)=>{
+    try {
+        const receiverId = req.params.id;
+        const senderId = req.id
+        const conversation = await Conversation.findOne({
+            participants: {$all: [senderId, receiverId]}
+        }).populate("messages")
+    } catch (error) {
+        console.log(error)
+    }
+}
