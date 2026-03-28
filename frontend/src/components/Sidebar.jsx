@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BiSearchAlt2 } from "react-icons/bi";
 import OtherUsers from "./OtherUsers"
 import axios from 'axios';
@@ -12,6 +12,11 @@ const Sidebar = () => {
   const { otherUsers } = useSelector(store => store.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  useEffect(() => {
+      if (!search.trim()) {
+        dispatch(setSearchedUser(null));
+      }
+    }, [search]);
   const logoutHandler = async () => {
 
     try {
@@ -24,12 +29,7 @@ const Sidebar = () => {
   }
   const searchSubmitHandler = (e) => {
     e.preventDefault()
-
-  if (!search.trim()) {
-    dispatch(setSearchedUser(null)) // ✅ reset
-    return
-  }
-
+    if (!search.trim()) return
     const conversationUser = otherUsers?.find((user) => user.fullName.toLowerCase().includes(search.toLowerCase()))
     if (conversationUser) {
       dispatch(setSearchedUser([conversationUser]))
