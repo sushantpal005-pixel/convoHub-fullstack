@@ -11,11 +11,11 @@ import {setOnlineUsers} from "./redux/userSlice"
 
 const router = createBrowserRouter([
   {
-    path:"/",
+    path:"/homepage",
     element:<HomePage/>
   },
   {
-    path:"/register",
+    path:"/",
     element:<Signup/>
   },
   {
