@@ -21,13 +21,16 @@ const Message = ({ message }) => {
       </div>
       <div className="chat-header">
         <time className="text-xs opacity-50">
-          {new Date(message.createdAt).toLocaleTimeString([], {
+          {new Date(message.createdAt).toLocaleString([], {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
             hour: '2-digit',
             minute: '2-digit'
           })}
         </time>
       </div>
-      <div className={`chat-bubble ${message?.senderId !== authUser?._id ? 'bg-gray-200 text-black' : ''} `}>{message?.message}</div>
+      <div className={`chat-bubble break-words max-w-xs ${message?.senderId !== authUser?._id ? 'bg-gray-200 text-black' : ''} `}>{message?.message}</div>
 
     </div>
 
